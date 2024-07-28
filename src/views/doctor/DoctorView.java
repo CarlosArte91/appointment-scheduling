@@ -2,6 +2,11 @@ package views.doctor;
 
 import model.dao.DoctorDao;
 import model.entity.Doctor;
+import views.appointment.AppointmentView;
+import views.login.LoginView;
+
+import static views.login.UserLogged.*;
+
 import static views.MainView.*;
 
 import static views.menus.Menus.*;
@@ -74,7 +79,8 @@ public class DoctorView {
 
     public static void loginView() {
         LinkedHashMap<String, String> loginTitle = createHashLoginTitle();
-
+        createMenu(loginTitle);
+        verifyEmail();
     }
 
     private static LinkedHashMap<String, String> createHashLoginTitle() {
@@ -86,6 +92,7 @@ public class DoctorView {
     }
 
     private static void verifyEmail() {
+        DoctorDao doctorDao = new DoctorDao();
         String email = "";
         boolean isValid = false;
 
@@ -93,9 +100,46 @@ public class DoctorView {
         isValid = Doctor.validateDoctor(email);
 
         if (isValid) {
-            // logged and continue
+            doctorLogged = doctorDao.byEmail(email);
+            showDoctorMenu();
         } else {
-            System.out.println("Email is not valid.");
+            System.out.println("\nEmail is not valid.");
+            LoginView.showLoginMenu();
+        }
+    }
+
+    public static void showDoctorMenu() {
+        LinkedHashMap<String, String> doctorMenu = createHashDoctorMenu();
+        do {
+            createMenu(doctorMenu);
+            optionSelected = readNumber();
+            goToDoctorOption(optionSelected);
+        } while (optionSelected < 0 || optionSelected > 2);
+    }
+
+    private static LinkedHashMap<String, String> createHashDoctorMenu() {
+        LinkedHashMap<String, String> doctorMenu = new LinkedHashMap<>();
+        doctorMenu.put("title", "Welcome Doctor " + doctorLogged.getName());
+        doctorMenu.put("subtitle", "Choose an option from the menu.");
+        doctorMenu.put("1.", "Add new appointment");
+        doctorMenu.put("2.", "Show my appointments");
+        doctorMenu.put("0.", "Exit");
+
+        return doctorMenu;
+    }
+
+    public static void goToDoctorOption(int optionSelected) {
+        switch (optionSelected) {
+            case 1:
+                AppointmentView.createByDoctor();
+                break;
+            case 2:
+                System.out.println("\n¡Under Construction!");
+            case 0:
+                showMainView();
+                break;
+            default:
+                break;
         }
     }
 }

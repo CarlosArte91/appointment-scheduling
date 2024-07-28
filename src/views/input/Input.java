@@ -1,5 +1,7 @@
 package views.input;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Input {
@@ -16,5 +18,17 @@ public class Input {
         String text = "";
         text = scanner.nextLine();
         return text;
+    }
+
+    public static LocalDate readDate() {
+        String dateIn = "";
+        dateIn = scanner.nextLine();
+        return LocalDate.parse(dateIn);
+    }
+
+    public static LocalTime readTime() {
+        String timeIn = "";
+        timeIn = scanner.nextLine();
+        return LocalTime.parse(timeIn);
     }
 }

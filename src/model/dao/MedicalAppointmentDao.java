@@ -20,6 +20,7 @@ public class MedicalAppointmentDao {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(medicalAppointmentsData, true))) {
             writer.write(medicalAppointment.toCSV());
             writer.newLine();
+            System.out.println("Se creó");
         } catch (Exception e) {
             System.out.println("An error occurred " + e.getMessage());
         }

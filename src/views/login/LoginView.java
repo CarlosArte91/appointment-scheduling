@@ -1,5 +1,7 @@
 package views.login;
 
+import views.doctor.DoctorView;
+
 import static views.MainView.*;
 
 import static views.input.Input.*;
@@ -34,10 +36,10 @@ public class LoginView {
     public static void goToOption(int optionSelected) {
         switch (optionSelected) {
             case 1:
-                System.out.println("Go to Doctor");
+                DoctorView.loginView();
                 break;
             case 2:
-                System.out.println("Go to Patient");
+                System.out.println("\n¡Under Construction!");
                 break;
             case 0:
                 showMainView();

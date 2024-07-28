@@ -70,4 +70,25 @@ public class PatientView {
                 break;
         }
     }
+
+    public static void loginView() {
+        LinkedHashMap<String, String> loginTitle = createHashLoginTitle();
+    }
+
+    private static LinkedHashMap<String, String> createHashLoginTitle() {
+        LinkedHashMap<String, String> loginTitle = new LinkedHashMap<>();
+        loginTitle.put("title", "Login Patient");
+        loginTitle.put("subtitle", "Enter your mail.");
+
+        return loginTitle;
+    }
+
+    private static void verifyEmail() {
+        PatientDao patientDao = new PatientDao();
+        String email = "";
+        boolean isValid = false;
+
+        email = readText();
+        // isValid = Patient
+    }
 }
